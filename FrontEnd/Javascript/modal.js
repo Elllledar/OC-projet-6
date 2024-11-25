@@ -139,12 +139,6 @@ function deleteGallery() {
   });
 }
 
-document.getElementById("delete-gallery").addEventListener("click", function() {
-  const confirmation = confirm("Êtes-vous sûr de vouloir supprimer la galerie ?");
-  if (confirmation) {
-    deleteGallery();
-  }
-});
 
 //Check form filled//
 
