@@ -59,7 +59,6 @@ function createModalWorkFigure(work) {
         
   figureImage.src = work.imageUrl
   figureImage.alt = work.title
-  figureCaption.innerHTML = "éditer"
   figure.setAttribute('data-id', work.id); // Add a data-id attribute to store the work ID
   deleteIcon.className = "fa-regular fa-trash-can" 
 
