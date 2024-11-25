@@ -90,36 +90,36 @@ fetch('http://localhost:5678/api/works')
 
 function deleteWorkById(workId) {
   const token = sessionStorage.getItem("Token");
-  const confirmation = confirm("Êtes-vous sûr de vouloir supprimer ce travail ?");
-  if (confirmation) {
-    fetch(`http://localhost:5678/api/works/${workId}`, {
-      method: 'DELETE',
-      headers: {
-        "Accept" : 'application/json',
-        "Authorization" : `Bearer ${token}`
-      }
-    })
-    .then(response => {
-      if (!response.ok){
-      throw new error ('La supression du travai à echoué.');
+  
+  fetch(`http://localhost:5678/api/works/${workId}`, {
+    method: 'DELETE',
+    headers: {
+      "Accept": 'application/json',
+      "Authorization": `Bearer ${token}`
     }
+  })
+  .then(response => {
+    if (!response.ok) {
+      throw new Error('La suppression du travail a échoué.');
+    }
+    // Supprimer l'élément dans la modale
     const modalWorkToRemove = document.querySelector(`figure[data-id="${workId}"]`);
     if (modalWorkToRemove) {
       modalWorkToRemove.remove();
-      
+    } else {
+      console.error('Élément à supprimer non trouvé dans la modale');
+    }
+
+    // Supprimer l'élément dans la galerie principale
     const galleryWorkToRemove = document.querySelector(`figure[data-id="${workId}"]`);
     if (galleryWorkToRemove) {
-        galleryWorkToRemove.remove();
+      galleryWorkToRemove.remove();
     } else {
-        console.error('Élément à supprimer non trouvé dans la galerie principale');
-      }
-    } else {
-        console.error('Élément à supprimer non trouvé dans la modale');
+      console.error('Élément à supprimer non trouvé dans la galerie principale');
     }
   })
   .catch(error => console.error(error));
-  }    
-}  
+}
 
 //Delete all gallery//
 
